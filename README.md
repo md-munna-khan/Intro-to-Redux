@@ -185,4 +185,5 @@ dispatch({ type: "ADD_TODO", payload: { text: "Buy milk" } });
 | **Dispatcher** | A central hub that forwards the action to registered **Store callbacks** | ❌ **Does not exist**                                                    |
 | **dispatch()** | Part of the **Dispatcher**, sends the Action to Stores                   | A function from Redux store that sends an **Action** to the **Reducer** |
 
-![alt text](image-6.png)
+
+![Diagram](./reduxs.gif)
