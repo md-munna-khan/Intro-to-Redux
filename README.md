@@ -34,3 +34,4 @@ Let’s begin by asking the most important question:
 - Legacy redux (old one) did not had `action` and `reduce`. we had to create it by our own.Old Redux was unopinionated 
 - Whether redux tool kit is opinionated (used for local state)
 - with redux tool kit we get `RTK Query`. Which is used for data fetching. In redux legacy it `Redux Thunk` was used for data fetching
+![alt text](image-1.png)
