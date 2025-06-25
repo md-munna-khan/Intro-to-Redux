@@ -184,3 +184,6 @@ dispatch({ type: "ADD_TODO", payload: { text: "Buy milk" } });
 | **Action**     | A plain object created and sent to the **Dispatcher**                    | A plain object **directly dispatched** to the **Reducer**               |
 | **Dispatcher** | A central hub that forwards the action to registered **Store callbacks** | ❌ **Does not exist**                                                    |
 | **dispatch()** | Part of the **Dispatcher**, sends the Action to Stores                   | A function from Redux store that sends an **Action** to the **Reducer** |
+
+
+![Diagram](./reduxs.gif)
