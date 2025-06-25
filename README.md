@@ -14,4 +14,8 @@ By the end, you'll not only be able to set up and use Redux confidently but also
 
 Let’s begin by asking the most important question:
 
-"Why Redux?"
+## 21-1 Why Redux?
+- 1 Most of the popular Library and most oldest
+- 2 Most of Company use Redux
+- 3 more fast value generated
+- 4  as a fresher must learn as like library which library use maximum company and people and thats why we choose this library
