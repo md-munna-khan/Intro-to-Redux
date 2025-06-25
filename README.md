@@ -34,3 +34,17 @@ Let’s begin by asking the most important question:
 - Legacy redux (old one) did not had `action` and `reduce`. we had to create it by our own.Old Redux was unopinionated 
 - Whether redux tool kit is opinionated (used for local state)
 - with redux tool kit we get `RTK Query`. Which is used for data fetching. In redux legacy it `Redux Thunk` was used for data fetching
+![alt text](image-1.png)
+## 21-3 State, Bi-directional, and uni-directional data flow.
+
+#### What is state?
+- Its present state. 
+- Each user action generates a state. 
+- Storing the states methods are different.
+- State is a piece of information 
+- State Communication can be of two types in an application 
+  1. `Bidirectional` : State can flow from one component to another or from the passed component to previous component. Handling multiple component link becomes tough can create infinity loop. This is why unidirectional is best. 
+
+  ![alt text](image-5.png)
+
+  1. `Unidirectional` : State can pass in one direction. Redux brought unidirectional using flux 
