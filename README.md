@@ -92,3 +92,95 @@ View (listens to store, re-renders)
 
 
 ![alt text](image-4.png)
+## 21-6 Inner workings of redux.
+![alt text](image-5.png)
+- In Redux there is one central store. 
+- We can make multiple stores but this not a good practice. 
+- The best practice is to keep one store whole redux. 
+- Store contains two things 
+  1. **State** : Whole application data is called state. plain object is stored inside state
+  2. **Reducer** : The changes are coming to state, how would the change will come will be defined by reducer function inside reducer. Reducer has the access of the state. If any state change request comes reducer takes steps based on what is coming and changes the state with new update. 
+
+- View is UI. View is closely connected with store(specifically with state). This is called View is `subscribed` with store. Subscribed means kind of its listening to the store. When a change comes, relevant `view` connected with `store` gets the change and updated through rendering.
+
+
+![alt text](image-8.png)
+
+- User clicks the "+" button in the View/UI (e.g., to increment a counter).
+- The event triggers a dispatch of an Action like:
+  
+    ```js
+    { type: "INCREMENT", payload: { field, value } } // here payload is for the field and the value we want to add. It may not exist.  
+    ```
+- The Reducer receives the Action via dispatch and updates the relevant state (e.g., count = 0 → 1) based on the `INCREMENT` type given inside dispatch.
+- Reducer is holding the business logics. 
+- The Store holds the new state, and the View re-renders to reflect the updated value.
+- This state can also include complex nested objects like:
+
+    ```json
+    fb = { posts: [...], events: [...], messages: [...] }
+    ```
+
+![alt text](ReduxDataFlowDiagram-49fa8c3968371d9ef6f2a1486bd40a26.gif)
+
+#### Three things we nee to understand 
+
+- **Reducer** : How To Do ?
+- **Action** : What To Do ?
+- **Store** : What to store ? 
+
+
+```
+User Input (View)
+       ↓
+dispatch(action)
+       ↓
+Reducer (pure function that returns new state)
+       ↓
+Store updates state
+       ↓
+View (subscribed to store, re-renders)
+
+```
+
+
+
+#### Difference between flux 
+
+```
+      | FLUX                      | REDUX                        |
+      | ------------------------- | ---------------------------- |
+      | View (User Input)         | View (User Input)            |
+      | ↓                         | ↓                            |
+      | Create Action             | dispatch(action)             |
+      | ↓                         | ↓                            |
+      | Dispatcher                | Reducer                      |
+      | ↓                         | (pure function)              |
+      | Store (updates state)     | ↓                            |
+      | ↓                         | Store (holds state)          |
+      | Store emits change        | ↓                            |
+      | ↓                         | View subscribes & re-renders |
+      | View listens & re-renders |
+
+```
+
+#### Flex 
+
+```js
+const action = { type: "ADD_TODO", payload: { text: "Buy milk" } };
+Dispatcher.dispatch(action); // Dispatcher sends it to store's callback
+
+```
+
+#### Redux 
+
+```js 
+dispatch({ type: "ADD_TODO", payload: { text: "Buy milk" } });
+
+```
+
+| Term           | In **Flux**                                                              | In **Redux**                                                            |
+| -------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| **Action**     | A plain object created and sent to the **Dispatcher**                    | A plain object **directly dispatched** to the **Reducer**               |
+| **Dispatcher** | A central hub that forwards the action to registered **Store callbacks** | ❌ **Does not exist**                                                    |
+| **dispatch()** | Part of the **Dispatcher**, sends the Action to Stores                   | A function from Redux store that sends an **Action** to the **Reducer** |
