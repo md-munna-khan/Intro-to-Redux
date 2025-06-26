@@ -233,3 +233,45 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 )
 ```
+## 21-8 Creating your first slice.
+- 1 @@INIT thats means successful connect
+![alt text](image-7.png)
+![alt text](image-8.png)
+![alt text](image-9.png)
+## 21-8 Creating your first slice.
+
+- Add redux Devtool to chrome 
+
+![alt text](image-9.png)
+
+- If this shows redux is connected. 
+- After connection with redux we have to start making the reducers. 
+- We have to make slice now. 
+- src -> redux -> features -> counter -> counterSlice.ts
+
+```ts
+import { createSlice } from "@reduxjs/toolkit";
+const initialState = {
+    counter: 0
+}
+const counterSlice = createSlice({
+    name: "counter",
+    initialState,
+    reducers: {}
+})
+
+export default counterSlice.reducer;
+```
+
+- now lets connect the slice with the redux store. 
+- src -> redux -> store.ts
+```ts 
+import { configureStore } from '@reduxjs/toolkit'
+import counterReducer from "./features/counter/counterSlice"
+export const store = configureStore({
+    reducer: {
+        counter: counterReducer
+    }
+})
+
+```
