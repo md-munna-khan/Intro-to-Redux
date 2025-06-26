@@ -275,3 +275,68 @@ export const store = configureStore({
 })
 
 ```
+## 21-9 Write Actions in Redux.
+- lets make reducer functions now.
+- The Reducer Functions must be pure functions. and the function must return a plain object. and lets make actions 
+- src -> redux -> features -> counter -> counterSlice.ts
+```ts
+import { createSlice } from "@reduxjs/toolkit";
+const initialState = {
+    count: 0
+}
+const counterSlice = createSlice({
+    name: "counter",
+    initialState,
+    reducers: {
+        // through state we will get the initial state value
+        increment: (state) => {
+            state.count = state.count + 1
+        },
+        decrement: (state) => {
+            state.count = state.count - 1
+        }
+    }
+})
+
+// exporting the reducers
+export const { increment, decrement } = counterSlice.actions
+
+export default counterSlice.reducer;
+```
+- in reducers we are writing business logic. Redux toolkit is helping us by generating actions automatically
+  
+- Now Lets dispatch the actions using event handler 
+- src -> app.tsx
+
+```tsx
+import { useDispatch } from "react-redux"
+import { decrement, increment } from "./redux/features/counter/counterSlice"
+
+function App() {
+
+  const dispatch = useDispatch()
+
+  const handleIncrement = () =>{
+    dispatch(increment())
+  }
+  const handleDecrement = () =>{
+    dispatch(decrement())
+  }
+
+  return (
+    <>
+      <div>
+        <h1>Counter With Redux</h1>
+        <button onClick={handleIncrement}>Increment</button>
+        <div>
+          0
+        </div>
+        <button onClick={handleDecrement}>Decrement</button>
+      </div>
+    </>
+  )
+}
+
+export default App
+
+```
