@@ -515,3 +515,96 @@ function App() {
 export default App
 
 ```
+## 21-11 Add Data with Action Payloads.
+- Now Lets Increment The Value by 5 
+- App.tsx
+```tsx
+import { decrement, increment } from "./redux/features/counter/counterSlice"
+
+import { useAppDispatch, useAppSelector } from "./redux/hooks"
+
+function App() {
+
+  const dispatch = useAppDispatch()
+
+  const { count } = useAppSelector((state) => state.counter)
+
+  const handleIncrement = (amount: number) => {
+    dispatch(increment(amount))
+  }
+  const handleDecrement = () => {
+    dispatch(decrement())
+  }
+
+  return (
+    <>
+      <div>
+        <h1>Counter With Redux</h1>
+        <button onClick={() => handleIncrement(5)}>Increment By 5 </button>
+        <button onClick={() => handleIncrement(1)}>Increment </button>
+        <div>
+          {count}
+        </div>
+        <button onClick={handleDecrement}>Decrement</button>
+      </div>
+    </>
+  )
+}
+
+export default App
+
+```
+
+- counterSlice.ts
+
+```ts 
+import { createSlice } from "@reduxjs/toolkit";
+const initialState = {
+    count: 0
+}
+const counterSlice = createSlice({
+    name: "counter",
+    initialState,
+    reducers: {
+        // through state we will get the initial state value
+        increment: (state, action) => {
+            console.log(action)
+            state.count = state.count + action.payload
+        },
+        decrement: (state) => {
+            state.count = state.count - 1
+        }
+    }
+})
+
+export const { increment, decrement } = counterSlice.actions
+
+export default counterSlice.reducer;
+```
+
+
+- We will get the payload inside the action if we declare from the handler 
+
+![alt text](image-10.png)
+
+
+- we can send object inside payload as well 
+
+```tsx
+  const handleIncrement = (amount: number) => {
+    dispatch(increment({amount : amount}))
+  }
+```
+```ts
+ reducers: {
+        // through state we will get the initial state value
+        increment: (state, action) => {
+            console.log(action)
+            state.count = state.count + action.payload.amount
+        },
+        decrement: (state) => {
+            state.count = state.count - 1
+        }
+    }
+```
+![alt text](image-11.png)
