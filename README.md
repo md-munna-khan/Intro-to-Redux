@@ -187,3 +187,49 @@ dispatch({ type: "ADD_TODO", payload: { text: "Buy milk" } });
 
 
 ![Diagram](./reduxs.gif)
+## 21-7 Set Up a Redux Store.
+
+[Redux Docs](https://redux-toolkit.js.org/introduction/why-rtk-is-redux-today)
+
+- First Install Redux. We need `Redux Wrapper` and `Redux Toolkit`
+  1. Install Redux toolkit 
+   
+   ```js
+   npm install @reduxjs/toolkit
+   ```
+  2. Install Redux Toolkit 
+   
+   ```js
+   npm install react-redux
+   ```
+- Create a Folder named `redux` inside `src`
+- create file inside `redux` named `store.ts`
+- Then make a store 
+- Without reducer we can not create store so we must pass a reducer
+- src -> redux -> store.ts
+```ts
+import { configureStore } from '@reduxjs/toolkit'
+
+export const store = configureStore({
+    reducer: {}
+})
+
+```
+- We must wrap the app with the redux provider like a wrapper. 
+- src -> main.tsx
+```ts 
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.tsx'
+import { Provider } from 'react-redux'
+import { store } from './redux/store.ts'
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </StrictMode>,
+)
+```
